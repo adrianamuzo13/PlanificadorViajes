@@ -1,44 +1,55 @@
 import { createContext, useState, useEffect } from 'react'
-import type { Trip } from '../types/index'
+import type { Trip } from '../types'
+import * as api from '../api/client'
 
 interface TripContextType {
   trips: Trip[]
-  addTrip: (trip: Trip) => void
-  updateTrip: (trip: Trip) => void
-  deleteTrip: (id: string) => void
+  loading: boolean
+  error: string | null
+  addTrip: (trip: Omit<Trip, 'id'>) => Promise<void>
+  updateTrip: (id: string, trip: Partial<Trip>) => Promise<void>
+  deleteTrip: (id: string) => Promise<void>
 }
 
-export const TripContext = createContext<TripContextType>({
-  trips: [],
-  addTrip: () => {},
-  updateTrip: () => {},
-  deleteTrip: () => {},
-})
+export const TripContext = createContext<TripContextType | null>(null)
 
 export function TripProvider({ children }: { children: React.ReactNode }) {
   const [trips, setTrips] = useState<Trip[]>([])
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState<string | null>(null)
 
   useEffect(() => {
-    fetch('http://localhost:3000/api/v1/trips')
-      .then((res) => res.json())
-      .then((data) => setTrips(data))
-      .catch((err) => console.error('Error cargando viajes:', err))
+    const loadTrips = async () => {
+      setLoading(true)
+      try {
+        const data = await api.getTrips()
+        setTrips(data)
+      } catch {
+        setError('Error al cargar los viajes')
+      } finally {
+        setLoading(false)
+      }
+    }
+    loadTrips()
   }, [])
 
-  const addTrip = (trip: Trip) => {
-    setTrips((prev) => [...prev, trip])
+  const addTrip = async (trip: Omit<Trip, 'id'>) => {
+    const newTrip = await api.createTrip(trip)
+    setTrips((prev) => [...prev, newTrip])
   }
 
-  const updateTrip = (trip: Trip) => {
-    setTrips((prev) => prev.map((t) => (t.id === trip.id ? trip : t)))
+  const updateTrip = async (id: string, trip: Partial<Trip>) => {
+    const updated = await api.updateTrip(id, trip)
+    setTrips((prev) => prev.map((t) => (t.id === id ? updated : t)))
   }
 
-  const deleteTrip = (id: string) => {
+  const deleteTrip = async (id: string) => {
+    await api.deleteTrip(id)
     setTrips((prev) => prev.filter((t) => t.id !== id))
   }
 
   return (
-    <TripContext.Provider value={{ trips, addTrip, updateTrip, deleteTrip }}>
+    <TripContext.Provider value={{ trips, loading, error, addTrip, updateTrip, deleteTrip }}>
       {children}
     </TripContext.Provider>
   )

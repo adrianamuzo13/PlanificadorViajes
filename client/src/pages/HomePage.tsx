@@ -3,7 +3,14 @@ import { TripContext } from '../context/TripContext'
 import TripCard from '../components/TripCard'
 
 export default function HomePage() {
-  const { trips } = useContext(TripContext)
+  const context = useContext(TripContext)
+
+  if (!context) return <div>Cargando...</div>
+
+  const { trips, loading, error } = context
+
+  if (loading) return <div className="text-center mt-20 text-gray-400">Cargando viajes...</div>
+  if (error) return <div className="text-center mt-20 text-red-400">{error}</div>
 
   return (
     <div className="max-w-4xl mx-auto px-6 py-10">
