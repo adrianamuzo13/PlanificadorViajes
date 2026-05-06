@@ -1,13 +1,8 @@
-import { useContext } from 'react'
-import { TripContext } from '../context/TripContext'
 import TripCard from '../components/TripCard'
+import { useTrip } from '../hooks/useTrip'
 
 export default function HomePage() {
-  const context = useContext(TripContext)
-
-  if (!context) return <div>Cargando...</div>
-
-  const { trips, loading, error } = context
+  const { trips, loading, error } = useTrip()
 
   if (loading) return <div className="text-center mt-20 text-gray-400">Cargando viajes...</div>
   if (error) return <div className="text-center mt-20 text-red-400">{error}</div>

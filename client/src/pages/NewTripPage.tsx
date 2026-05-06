@@ -1,11 +1,10 @@
-import { useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { TripContext } from '../context/TripContext'
+import { useTrip } from '../hooks/useTrip'
 import TripForm from '../components/TripForm'
 import type { Trip } from '../types'
 
 export default function NewTripPage() {
-  const { addTrip } = useContext(TripContext)
+  const { addTrip } = useTrip()
   const navigate = useNavigate()
 
   const handleSubmit = async (data: Partial<Trip>) => {

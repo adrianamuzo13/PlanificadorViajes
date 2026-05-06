@@ -1,12 +1,11 @@
 import { useParams, useNavigate } from 'react-router-dom'
-import { useContext } from 'react'
-import { TripContext } from '../context/TripContext'
+import { useTrip } from '../hooks/useTrip'
 import DayCard from '../components/DayCard'
 
 export default function TripDetailPage() {
   const { id } = useParams()
   const navigate = useNavigate()
-  const { trips, deleteTrip } = useContext(TripContext)
+  const { trips, deleteTrip } = useTrip()
   const trip = trips.find((t) => t.id === id) ?? null
 
   const handleDelete = async () => {

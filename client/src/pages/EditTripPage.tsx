@@ -1,16 +1,11 @@
-import { useContext } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
-import { TripContext } from '../context/TripContext'
+import { useTrip } from '../hooks/useTrip'
 import TripForm from '../components/TripForm'
 
 export default function EditTripPage() {
   const { id } = useParams()
   const navigate = useNavigate()
-  const context = useContext(TripContext)
-
-  if (!context) return <div>Cargando...</div>
-
-  const { trips, updateTrip } = context
+  const { trips, updateTrip } = useTrip()
   const trip = trips.find((t) => t.id === id)
 
   if (!trip) return <div className="text-center mt-20 text-gray-400">Viaje no encontrado</div>
