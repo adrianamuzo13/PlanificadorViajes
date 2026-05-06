@@ -19,7 +19,7 @@ export default function TripCard({ trip }: Props) {
         to={`/trips/${trip.id}`}
         className="inline-block mt-4 text-blue-600 font-semibold hover:underline text-sm"
       >
-        Ver detalle →
+        Ver detalles →
       </Link>
     </div>
   )

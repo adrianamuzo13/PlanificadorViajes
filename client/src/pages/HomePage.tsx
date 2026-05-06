@@ -26,7 +26,7 @@ export default function HomePage() {
             <TripCard key={trip.id} trip={trip} />
           ))}
         </div>
-      )}
+      )}detalle
     </div>
   )
 }
