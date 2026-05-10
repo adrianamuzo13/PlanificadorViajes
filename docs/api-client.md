@@ -1,5 +1,4 @@
 # Capa de Red y Cliente de API
-
 El archivo `src/api/client.ts` es el cliente de API tipado del frontend.
 Contiene todas las funciones que se comunican con el backend Express.
 
@@ -23,7 +22,7 @@ Recibe el ID y los campos a actualizar.
 
 ### deleteTrip
 Elimina un viaje por su ID.
-No devuelve datos, solo lanza error si falla.
+No devuelve datos, solo lanza error si  es que falla.
 
 ## Gestión de estados de red
 Todos los estados de red se gestionan en TripContext:
@@ -34,17 +33,3 @@ Todos los estados de red se gestionan en TripContext:
 ## Tipos
 Todas las funciones usan los tipos definidos en `src/types/index.ts`
 para garantizar que los datos del frontend y backend están alineados.
-
-## Ejemplo
-```typescript
-// Obtener viajes
-const trips = await getTrips() // Trip[]
-
-// Crear viaje
-const newTrip = await createTrip({
-  destination: 'Roma',
-  startDate: '2025-07-01',
-  endDate: '2025-07-07',
-  days: []
-}) // Trip
-```
