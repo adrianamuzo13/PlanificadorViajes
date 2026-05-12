@@ -8,7 +8,8 @@ const PORT = 3000
 app.use(cors({
   origin: [
     'http://localhost:5173',
-    'https://planificador-viajes-mocha.vercel.app'
+    'https://planificador-viajes-mocha.vercel.app',
+    'https://planificador-viajes-y8m6.vercel.app'
   ],
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   allowedHeaders: ['Content-Type']
