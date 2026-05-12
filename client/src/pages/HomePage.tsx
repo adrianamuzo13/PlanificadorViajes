@@ -1,5 +1,6 @@
 import { useTrip } from '../hooks/useTrip'
 import TripCard from '../components/TripCard'
+import { Plane } from 'lucide-react'
 
 export default function HomePage() {
   const { trips, loading, error } = useTrip()
@@ -9,9 +10,13 @@ export default function HomePage() {
 
   return (
     <div className="max-w-4xl mx-auto px-6 py-10">
-      <h1 className="text-3xl font-bold text-gray-800 dark:text-white mb-8">Mis Viajes ✈️</h1>
+      <div className="flex items-center gap-3 mb-8">
+        <Plane size={32} className="text-primary-400" />
+        <h1 className="text-3xl font-bold text-gray-800 dark:text-white">Mis Viajes</h1>
+      </div>
       {trips.length === 0 ? (
         <div className="text-center text-gray-400 mt-20">
+          <Plane size={48} className="mx-auto mb-4 opacity-30" />
           <p className="text-xl">No tienes viajes todavía</p>
           <p className="text-sm mt-2">Crea tu primer viaje con el botón de arriba</p>
         </div>
