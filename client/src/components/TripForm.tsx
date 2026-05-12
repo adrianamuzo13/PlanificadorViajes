@@ -11,11 +11,12 @@ export default function TripForm({ initialData, onSubmit }: Props) {
   const [startDate, setStartDate] = useState(initialData?.startDate || '')
   const [endDate, setEndDate] = useState(initialData?.endDate || '')
   const [description, setDescription] = useState(initialData?.description || '')
+  const [imageUrl, setImageUrl] = useState(initialData?.imageUrl || '')
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
     if (!destination || !startDate || !endDate) return
-    onSubmit({ destination, startDate, endDate, description })
+    onSubmit({ destination, startDate, endDate, description, imageUrl })
   }
 
   return (
@@ -29,7 +30,7 @@ export default function TripForm({ initialData, onSubmit }: Props) {
           value={destination}
           onChange={(e) => setDestination(e.target.value)}
           placeholder="Ej: París, Francia"
-          className="w-full border dark:border-gray-600 rounded-lg px-3 py-2 text-sm bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-400"
+          className="w-full border dark:border-gray-600 rounded-lg px-3 py-2 text-sm bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-primary-300"
         />
       </div>
       <div className="flex gap-4">
@@ -41,7 +42,7 @@ export default function TripForm({ initialData, onSubmit }: Props) {
             type="date"
             value={startDate}
             onChange={(e) => setStartDate(e.target.value)}
-            className="w-full border dark:border-gray-600 rounded-lg px-3 py-2 text-sm bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-400"
+            className="w-full border dark:border-gray-600 rounded-lg px-3 py-2 text-sm bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-primary-300"
           />
         </div>
         <div className="flex-1">
@@ -52,7 +53,7 @@ export default function TripForm({ initialData, onSubmit }: Props) {
             type="date"
             value={endDate}
             onChange={(e) => setEndDate(e.target.value)}
-            className="w-full border dark:border-gray-600 rounded-lg px-3 py-2 text-sm bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-400"
+            className="w-full border dark:border-gray-600 rounded-lg px-3 py-2 text-sm bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-primary-300"
           />
         </div>
       </div>
@@ -65,12 +66,24 @@ export default function TripForm({ initialData, onSubmit }: Props) {
           onChange={(e) => setDescription(e.target.value)}
           placeholder="Describe tu viaje..."
           rows={3}
-          className="w-full border dark:border-gray-600 rounded-lg px-3 py-2 text-sm bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-400"
+          className="w-full border dark:border-gray-600 rounded-lg px-3 py-2 text-sm bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-primary-300"
+        />
+      </div>
+      <div>
+        <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1">
+          Imagen de portada (URL)
+        </label>
+        <input
+          type="url"
+          value={imageUrl}
+          onChange={(e) => setImageUrl(e.target.value)}
+          placeholder="https://ejemplo.com/imagen.jpg"
+          className="w-full border dark:border-gray-600 rounded-lg px-3 py-2 text-sm bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-primary-300"
         />
       </div>
       <button
         type="submit"
-        className="w-full bg-blue-600 text-white font-semibold py-2 rounded-lg hover:bg-blue-700 transition"
+        className="w-full bg-primary-400 text-white font-semibold py-2 rounded-lg hover:bg-primary-600 transition"
       >
         Guardar viaje
       </button>

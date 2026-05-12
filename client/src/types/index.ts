@@ -27,3 +27,14 @@ export interface Trip {
   accommodation?: Accommodation
   days: Day[]
 }
+
+export interface Trip {
+  id: string
+  destination: string
+  startDate: string
+  endDate: string
+  description?: string
+  imageUrl?: string
+  accommodation?: Accommodation
+  days: Day[]
+}

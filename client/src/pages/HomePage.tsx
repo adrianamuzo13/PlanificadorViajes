@@ -23,7 +23,7 @@ export default function HomePage() {
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
           {trips.map((trip) => (
-            <TripCard key={trip.id} trip={trip} />
+          <TripCard key={trip.id} trip={trip} />
           ))}
         </div>
       )}
